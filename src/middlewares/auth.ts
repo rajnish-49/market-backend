@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import jwt from "jsonwebtoken";
 import { config } from "../config/env";
 import { ApiError } from "../utils/ApiError";
+import { JwtPayload } from "../modules/auth/types";
 
 declare global {
   namespace Express {
@@ -22,10 +23,7 @@ export function authenticate(req: Request, res: Response, next: NextFunction) {
   const token = authHeader.split(" ")[1];
 
   try {
-    const decoded = jwt.verify(token, config.jwtSecret) as {
-      userId: string;
-      role: string;
-    };
+    const decoded = jwt.verify(token, config.jwtSecret) as JwtPayload;
     req.userId = decoded.userId;
     req.userRole = decoded.role;
     next();
