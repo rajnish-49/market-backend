@@ -17,7 +17,8 @@ export function authenticate(req: Request, res: Response, next: NextFunction) {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
-    return next(new ApiError(401, "Authorization token missing"));
+    return next(new ApiError(401, "Authorization token missing")); 
+    // passes an error object to Express, and Express then forwards that error to the global error-handling middleware.
   }
 
   const token = authHeader.split(" ")[1];

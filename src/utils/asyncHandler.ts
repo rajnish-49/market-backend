@@ -6,7 +6,7 @@ type AsyncFn = (
   req: Request,
   res: Response,
   next: NextFunction,
-) => Promise<unknown>;
+) => Promise<unknown>; // resolved value is unknown 
 
 // asyncHandler is a wrapper function
 // Purpose: so we never have to write try/catch in every controller
